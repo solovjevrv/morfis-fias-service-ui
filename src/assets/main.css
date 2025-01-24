@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'RobotoFlex';
+  src: url('../fonts/RobotoFlex.ttf') format('truetype-variations');
+  font-weight: 450;
+  font-stretch: 110%;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RobotoFlex';
+  src: url('../fonts/RobotoFlex.ttf') format('truetype-variations');
+  font-weight: 730;
+  font-stretch: 110%;
+  font-style: bold;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: RobotoFlex;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 450;
+  margin: 0;
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0;
+  margin-top: 0;
+  word-break: normal;
+}
+h1 {
+  font-weight: 730;
+  font-size: 48px;
+  line-height: 62px;
+}
+h2 {
+  font-weight: 730;
+  font-size: 40px;
+  line-height: 56px;
+}
+h3 {
+  font-weight: 730;
+  font-size: 32px;
+  line-height: 44px;
+}
+h4 {
+  font-weight: 730;
+  font-size: 26px;
+  line-height: 36px;
+  margin-bottom: 24px;
+}
+h5 {
+  font-weight: 730;
+  font-size: 20px;
+  line-height: 30px;
+  margin-bottom: 16px;
+}
+
+h6 {
+  font-weight: 730;
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 8px;
+}
+
+label {
+  display: block;
+  font-weight: 730;
+  margin-bottom: 6px;
+}
