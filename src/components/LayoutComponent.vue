@@ -13,7 +13,7 @@
             <h6>Параметры запроса</h6>
             <div class="flex">
               <div class="input-wrap">
-                <label for="">Введите URL</label>
+                <label for="">Введите Base URL</label>
                 <el-input
                   v-model="baseUrl"
                   style="width: 300px"
@@ -93,7 +93,7 @@
 import { ref, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 
-const baseUrl = ref('http://localhost:5010');
+const baseUrl = ref('http://dev.morfis.ru:3008');
 const limit = ref('5');
 const address = ref('');
 const addressList = ref('');
@@ -101,13 +101,15 @@ const addressObj = ref('');
 const test = ref('');
 
 const querySearch = (queryString, cb) => {
-  const start = new Date().getTime();
-  getAddressGuesses(queryString, limit.value).then((results) => {
-    const end = new Date().getTime();
-    test.value = (end - start) / 1000;
-    addressList.value = results;
-    cb(results);
-  });
+  if (queryString) {
+    const start = new Date().getTime();
+    getAddressGuesses(queryString, limit.value).then((results) => {
+      const end = new Date().getTime();
+      test.value = (end - start) / 1000;
+      addressList.value = results;
+      cb(results);
+    });
+  }
 };
 
 const getAddressGuesses = async (query, limit) => {
@@ -116,7 +118,7 @@ const getAddressGuesses = async (query, limit) => {
     limit: limit,
   }).toString();
   try {
-    const res = await fetch(`${baseUrl.value}/guesses/?${params}`);
+    const res = await fetch(`${baseUrl.value}/address/guesses/?${params}`);
     return res.json();
   } catch (error) {
     ElMessage.error(`Произошла ошибка при получении данных! ${error}`);
