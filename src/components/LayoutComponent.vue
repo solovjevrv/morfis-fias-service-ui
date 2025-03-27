@@ -43,10 +43,8 @@
                 @select="handleSelect"
               >
                 <template #default="{ item }">
-                  <span class="suggestion-item"
-                    ><b>Полный адрес:</b>{{ item.fullName }}</span
-                  >
-                  <span class="suggestion-item"
+                  <span class="suggestion-item">{{ item.name }}</span>
+                  <!-- <span class="suggestion-item"
                     ><b>Короткий адрес:</b>{{ item.name }}</span
                   >
                   <span class="suggestion-item"
@@ -54,7 +52,7 @@
                   >
                   <span class="suggestion-item"
                     ><b>Object ID:</b>{{ item.objectId }}</span
-                  >
+                  > -->
                 </template>
               </el-autocomplete>
             </div>
@@ -77,8 +75,8 @@
             <ul class="guesses">
               <p v-if="addressList.length == 0">Данных не найдено</p>
               <li v-for="(item, index) in addressList" :key="index">
-                <span v-for="(value, key) in item">
-                  <b>{{ key }}</b> : {{ value }}
+                <span>
+                  {{ item.name }}
                 </span>
               </li>
             </ul>
@@ -106,8 +104,9 @@ const querySearch = (queryString, cb) => {
     getAddressGuesses(queryString, limit.value).then((results) => {
       const end = new Date().getTime();
       test.value = (end - start) / 1000;
-      addressList.value = results;
-      cb(results);
+      addressList.value = results.suggestions;
+      console.log(results);
+      cb(results.suggestions);
     });
   }
 };
@@ -118,7 +117,9 @@ const getAddressGuesses = async (query, limit) => {
     limit: limit,
   }).toString();
   try {
-    const res = await fetch(`${baseUrl.value}/address/guesses/?${params}`);
+    const res = await fetch(
+      `${baseUrl.value}/addresses/suggestions/?${params}`
+    );
     return res.json();
   } catch (error) {
     ElMessage.error(`Произошла ошибка при получении данных! ${error}`);
